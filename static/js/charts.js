@@ -128,7 +128,7 @@ function buildCharts(sample) {
         type: "indicator",
         mode: "gauge+number",
         gauge: {
-            axis: { range: [0,10],},
+            axis: { range: [0,10], tickmode: "auto", nticks: 6, showticklabels: "True" },
             bar: { color: "black"},
             steps: [
                 {range: [0,2], color: "red"},
