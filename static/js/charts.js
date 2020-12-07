@@ -73,6 +73,11 @@ function buildCharts(sample) {
     var sampleValues10 = result.sample_values.slice(0,10).reverse();
     var sampleValues = result.sample_values;
 
+    var metadata = data.metadata;
+    var metadataArray = metadata.filter(sampleObj => sampleObj.id == sample);
+    var washResults = metadataArray[0];
+    var washFreq = washResults.wfreq;
+
     // 7. Create the yticks for the bar chart.
     // Hint: Get the the top 10 otu_ids and map them in descending order  
     //  so the otu_ids with the most bacteria are last. 
@@ -118,7 +123,21 @@ function buildCharts(sample) {
 
     //Create the trace for the gauge chart
     var gaugeData = [{
-        
+        value: washFreq,
+        title: {text: "Belly Button Washing Frequency"},
+        type: "indicator",
+        mode: "gauge+number",
+        gauge: {
+            axis: { range: [0,10],},
+            bar: { color: "black"},
+            steps: [
+                {range: [0,2], color: "red"},
+                {range: [2,4], color: "orange"},
+                {range: [4,6], color: "yellow"},
+                {range: [6,8], color: "yellowgreen"},
+                {range: [8,10], color: "green"}
+            ]
+        }
     }
 
     ];
