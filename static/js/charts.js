@@ -64,31 +64,56 @@ function buildCharts(sample) {
     //  5. Create a variable that holds the first sample in the array.
     var result = samplesArray[0];
     // 6. Create variables that hold the otu_ids, otu_labels, and sample_values.
-    var otuLabels = result.otu_labels.slice(0,10).reverse();
-   
-    var otuIds = result.otu_ids.slice(0,10).reverse();
-    
-    var sampleValues = result.sample_values.slice(0,10).reverse();
-    
+    var otuLabels10 = result.otu_labels.slice(0,10).reverse();
+    var otuLabels = result.otu_labels;
+
+    var otuIds10 = result.otu_ids.slice(0,10).reverse();
+    var otuIds = result.otu_ids;
+
+    var sampleValues10 = result.sample_values.slice(0,10).reverse();
+    var sampleValues = result.sample_values;
+
     // 7. Create the yticks for the bar chart.
     // Hint: Get the the top 10 otu_ids and map them in descending order  
     //  so the otu_ids with the most bacteria are last. 
-    var yticks = otuIds.map(d => "OTU " + d);
+    var yticks = otuIds10.map(d => "OTU " + d);
 
     // 8. Create the trace for the bar chart. 
     var barData = [
         {
-      x: sampleValues,
+      x: sampleValues10,
       y: yticks,
       type: "bar",
       orientation: "h",
-      text: otuLabels}
+      text: otuLabels10}
     ];
     // 9. Create the layout for the bar chart. 
     var barLayout = {
      title: "Top 10 bacterial species (OTUs)"   
     };
+
     // 10. Use Plotly to plot the data with the layout. 
     Plotly.newPlot("bar", barData, barLayout);
+
+    //Create the trace for the bubble chart
+    var bubbleData = [
+        {
+    x: otuIds,
+    y: sampleValues,
+    text: otuLabels,
+    mode: "markers",
+    marker:{
+        size: sampleValues,
+        color: otuIds}
+    }
+    ]
+    //Create the layout for the bubble chart
+    var bubbleLayout = {
+        title: "Bacteria Cultures Per Sample",
+        xaxis: {title: "OTU ID"}
+    };
+
+    //Use Plotly to plot the data with the layout.
+    Plotly.newPlot("bubble", bubbleData, bubbleLayout);
   });
 }
