@@ -3,10 +3,16 @@
     text-align:center;
 }
 
-.jumbotron h1{
+.jumbotron h1 {
     color: #fff;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
-.jumbotron p{
+.jumbotron p {
     color: #fff;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body{
+    background: rgba(0, 128, 0, 0.3) /* Green background with 30% opacity */
 }
